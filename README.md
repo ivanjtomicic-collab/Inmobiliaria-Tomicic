@@ -27,3 +27,15 @@ npm run dev
 - TypeScript
 - React
 - Tailwind CSS
+- Supabase
+
+## Administración con Supabase
+
+1. Creá un proyecto en Supabase.
+2. Abrí **SQL Editor** y ejecutá [`supabase/schema.sql`](supabase/schema.sql).
+3. En **Authentication > Users**, creá el usuario propietario.
+4. Ejecutá la última consulta comentada del esquema reemplazando el email para autorizarlo.
+5. Copiá `.env.example` como `.env.local` y completá la URL y la clave pública `anon` del proyecto.
+6. En GitHub, agregá esas mismas variables en **Settings > Secrets and variables > Actions > Variables** con los nombres `VITE_SUPABASE_URL` y `VITE_SUPABASE_ANON_KEY`.
+
+El panel privado estará disponible en `/admin`. La clave `service_role` no debe utilizarse ni publicarse en este proyecto.

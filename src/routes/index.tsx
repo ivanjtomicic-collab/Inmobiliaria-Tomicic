@@ -2,7 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { PropertyCard } from "@/components/PropertyCard";
 import { ContactSection } from "@/components/ContactSection";
-import { properties } from "@/lib/properties";
+import { useProperties } from "@/lib/property-service";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -25,9 +25,11 @@ export const Route = createFileRoute("/")({
 
 function HomePage() {
   const navigate = useNavigate();
+  const { properties, loading, error } = useProperties();
   const [tipo, setTipo] = useState<"" | "casa" | "terreno" | "alquiler">("");
   const [ubicacion, setUbicacion] = useState("");
-  const featured = properties.slice(0, 3);
+  const featuredProperties = properties.filter((property) => property.featured);
+  const featured = (featuredProperties.length ? featuredProperties : properties).slice(0, 3);
 
   return (
     <>
@@ -93,11 +95,19 @@ function HomePage() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {featured.map((p, i) => (
-            <PropertyCard key={p.id} property={p} delay={(i + 1) * 100} />
-          ))}
-        </div>
+        {loading ? (
+          <p className="py-12 text-center text-fg/50">Cargando propiedades...</p>
+        ) : error ? (
+          <p className="py-12 text-center text-red-600">No se pudo cargar el catálogo.</p>
+        ) : featured.length === 0 ? (
+          <p className="py-12 text-center text-fg/50">Próximamente publicaremos nuevas propiedades.</p>
+        ) : (
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {featured.map((p, i) => (
+              <PropertyCard key={p.id} property={p} delay={(i + 1) * 100} />
+            ))}
+          </div>
+        )}
       </section>
 
       <ContactSection />

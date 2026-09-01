@@ -1,31 +1,38 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { getProperty } from "@/lib/properties";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { ContactSection } from "@/components/ContactSection";
+import { useProperties } from "@/lib/property-service";
 
 export const Route = createFileRoute("/propiedad/$id")({
-  loader: ({ params }) => {
-    const property = getProperty(params.id);
-    if (!property) throw notFound();
-    return property;
-  },
-  head: ({ loaderData }) => ({
-    meta: loaderData
-      ? [
-          { title: `${loaderData.title} — Inmobiliaria Tomicic` },
-          { name: "description", content: loaderData.description },
-          { property: "og:title", content: `${loaderData.title} — Inmobiliaria Tomicic` },
-          { property: "og:description", content: loaderData.description },
-        ]
-      : [
-          { title: "Propiedad no encontrada — Inmobiliaria Tomicic" },
-          { name: "robots", content: "noindex" },
-        ],
+  head: () => ({
+    meta: [{ title: "Detalle de propiedad — Inmobiliaria Tomicic" }],
   }),
   component: PropiedadDetalle,
 });
 
 function PropiedadDetalle() {
-  const property = Route.useLoaderData();
+  const { id } = Route.useParams();
+  const { properties, loading, error } = useProperties();
+  const property = properties.find((item) => item.id === id);
+
+  if (loading) {
+    return <p className="mx-auto max-w-7xl px-6 py-24 text-center text-fg/50">Cargando propiedad...</p>;
+  }
+
+  if (error || !property) {
+    return (
+      <section className="mx-auto max-w-2xl px-6 py-24 text-center">
+        <h1 className="text-4xl font-extrabold">Propiedad no encontrada</h1>
+        <p className="mt-4 text-fg/60">La publicación no existe o ya no está disponible.</p>
+        <Link
+          to="/propiedades"
+          search={{}}
+          className="mt-8 inline-block rounded-xl bg-fg px-6 py-3 text-white"
+        >
+          Ver propiedades
+        </Link>
+      </section>
+    );
+  }
 
   const specs = [
     property.surface && { label: "Superficie", value: property.surface },

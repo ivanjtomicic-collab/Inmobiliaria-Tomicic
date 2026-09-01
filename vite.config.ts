@@ -6,7 +6,7 @@
 // You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
-const githubPagesBase = process.env.GITHUB_ACTIONS
+const githubPagesBase = process.env["GITHUB_ACTIONS"]
   ? "/Inmobiliaria-Tomicic/"
   : "/";
 
@@ -39,6 +39,7 @@ export default defineConfig({
       { path: pagePath() },
       { path: pagePath("propiedades") },
       { path: pagePath("contacto") },
+      { path: pagePath("admin") },
       ...propertyIds.map((id) => ({ path: pagePath(`propiedad/${id}`) })),
     ],
   },

@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as ContactoRouteImport } from './routes/contacto'
 import { Route as PropiedadesRouteImport } from './routes/propiedades'
 import { Route as PropiedadIdRouteImport } from './routes/propiedad.$id'
@@ -17,6 +18,11 @@ import { Route as PropiedadIdRouteImport } from './routes/propiedad.$id'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactoRoute = ContactoRouteImport.update({
@@ -37,12 +43,14 @@ const PropiedadIdRoute = PropiedadIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/contacto': typeof ContactoRoute
   '/propiedades': typeof PropiedadesRoute
   '/propiedad/$id': typeof PropiedadIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/contacto': typeof ContactoRoute
   '/propiedades': typeof PropiedadesRoute
   '/propiedad/$id': typeof PropiedadIdRoute
@@ -50,20 +58,28 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/contacto': typeof ContactoRoute
   '/propiedades': typeof PropiedadesRoute
   '/propiedad/$id': typeof PropiedadIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/contacto' | '/propiedades' | '/propiedad/$id'
+  fullPaths: '/' | '/admin' | '/contacto' | '/propiedades' | '/propiedad/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/contacto' | '/propiedades' | '/propiedad/$id'
-  id: '__root__' | '/' | '/contacto' | '/propiedades' | '/propiedad/$id'
+  to: '/' | '/admin' | '/contacto' | '/propiedades' | '/propiedad/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/contacto'
+    | '/propiedades'
+    | '/propiedad/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
   ContactoRoute: typeof ContactoRoute
   PropiedadesRoute: typeof PropiedadesRoute
   PropiedadIdRoute: typeof PropiedadIdRoute
@@ -76,6 +92,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contacto': {
@@ -104,6 +127,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
   ContactoRoute: ContactoRoute,
   PropiedadesRoute: PropiedadesRoute,
   PropiedadIdRoute: PropiedadIdRoute,

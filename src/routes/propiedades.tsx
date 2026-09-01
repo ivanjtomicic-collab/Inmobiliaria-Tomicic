@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMemo } from "react";
 import { z } from "zod";
 import { PropertyCard } from "@/components/PropertyCard";
-import { properties } from "@/lib/properties";
+import { useProperties } from "@/lib/property-service";
 
 const searchSchema = z.object({
   tipo: z.enum(["casa", "terreno", "departamento", "alquiler"]).optional(),
@@ -40,6 +40,7 @@ const tipoFilters = [
 function PropiedadesPage() {
   const search = Route.useSearch();
   const navigate = Route.useNavigate();
+  const { properties, loading, error } = useProperties();
 
   const filtered = useMemo(() => {
     return properties.filter((p) => {
@@ -94,7 +95,11 @@ function PropiedadesPage() {
         )}
       </div>
 
-      {filtered.length === 0 ? (
+      {loading ? (
+        <p className="py-20 text-center text-fg/50">Cargando propiedades...</p>
+      ) : error ? (
+        <p className="py-20 text-center text-red-600">No se pudo cargar el catálogo.</p>
+      ) : filtered.length === 0 ? (
         <p className="py-20 text-center text-fg/50">
           No encontramos propiedades con esos filtros. Probá con otra búsqueda.
         </p>
