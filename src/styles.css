@@ -121,6 +121,10 @@
 }
 
 .dark {
+  --bg: oklch(0.16 0.008 255);
+  --fg: oklch(0.94 0.006 255);
+  --brand-blue: oklch(0.76 0.09 216);
+  color-scheme: dark;
   --background: oklch(0.129 0.042 264.695);
   --foreground: oklch(0.984 0.003 247.858);
   --card: oklch(0.208 0.042 265.755);
@@ -163,5 +167,6 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    transition: background-color 200ms ease, color 200ms ease;
   }
 }

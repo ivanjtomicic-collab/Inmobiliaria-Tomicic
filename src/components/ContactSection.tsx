@@ -31,7 +31,7 @@ export function ContactSection({ propertyTitle }: { propertyTitle?: string }) {
           </div>
         </div>
         <form
-          className="flex flex-col gap-6 rounded-3xl bg-white p-8 text-fg"
+          className="flex flex-col gap-6 rounded-3xl bg-bg p-8 text-fg"
           onSubmit={(e) => {
             e.preventDefault();
             setSent(true);

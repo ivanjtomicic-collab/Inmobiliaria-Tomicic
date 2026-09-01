@@ -40,7 +40,7 @@ function HomePage() {
         </h1>
 
         <form
-          className="mx-auto flex max-w-3xl flex-col gap-2 rounded-2xl bg-white p-2 shadow-xl shadow-fg/5 ring-1 ring-fg/5 md:flex-row"
+          className="mx-auto flex max-w-3xl flex-col gap-2 rounded-2xl bg-card p-2 text-card-foreground shadow-xl shadow-fg/5 ring-1 ring-fg/5 md:flex-row"
           onSubmit={(e) => {
             e.preventDefault();
             navigate({

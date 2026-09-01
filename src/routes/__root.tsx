@@ -8,7 +8,8 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { Toaster } from "sonner";
-import { useEffect, type ReactNode } from "react";
+import { Moon, Sun } from "lucide-react";
+import { useEffect, useState, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -42,28 +43,58 @@ function Header() {
         <Logo />
         <span className="text-xl font-extrabold uppercase tracking-tighter text-fg">Tomicic</span>
       </Link>
-      <div className="hidden gap-8 text-sm font-medium uppercase tracking-widest text-fg/60 md:flex">
-        {navLinks.map((l) => (
-          <Link
-            key={l.label}
-            to={l.to}
-            search={"search" in l ? l.search : {}}
-            className="transition-colors hover:text-brand-blue"
-            activeProps={{ className: "text-fg" }}
-          >
-            {l.label}
+      <div className="flex items-center gap-4 md:gap-8">
+        <div className="hidden gap-8 text-sm font-medium uppercase tracking-widest text-fg/60 md:flex">
+          {navLinks.map((l) => (
+            <Link
+              key={l.label}
+              to={l.to}
+              search={"search" in l ? l.search : {}}
+              className="transition-colors hover:text-brand-blue"
+              activeProps={{ className: "text-fg" }}
+            >
+              {l.label}
+            </Link>
+          ))}
+        </div>
+        <div className="flex gap-4 text-xs font-medium uppercase tracking-widest text-fg/60 md:hidden">
+          <Link to="/propiedades" className="transition-colors hover:text-brand-blue">
+            Propiedades
           </Link>
-        ))}
-      </div>
-      <div className="flex gap-6 text-sm font-medium uppercase tracking-widest text-fg/60 md:hidden">
-        <Link to="/propiedades" className="transition-colors hover:text-brand-blue">
-          Propiedades
-        </Link>
-        <Link to="/contacto" className="transition-colors hover:text-brand-blue">
-          Contacto
-        </Link>
+          <Link to="/contacto" className="hidden transition-colors hover:text-brand-blue sm:block">
+            Contacto
+          </Link>
+        </div>
+        <ThemeToggle />
       </div>
     </nav>
+  );
+}
+
+function ThemeToggle() {
+  const [dark, setDark] = useState(false);
+
+  useEffect(() => {
+    setDark(document.documentElement.classList.contains("dark"));
+  }, []);
+
+  const toggle = () => {
+    const nextDark = !dark;
+    document.documentElement.classList.toggle("dark", nextDark);
+    localStorage.setItem("tomicic-theme", nextDark ? "dark" : "light");
+    setDark(nextDark);
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={toggle}
+      className="grid size-10 shrink-0 place-items-center rounded-full border border-fg/10 text-fg transition-colors hover:bg-fg/5"
+      aria-label={dark ? "Activar modo claro" : "Activar modo oscuro"}
+      title={dark ? "Modo claro" : "Modo oscuro"}
+    >
+      {dark ? <Sun size={17} /> : <Moon size={17} />}
+    </button>
   );
 }
 
@@ -198,6 +229,11 @@ function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="es">
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem("tomicic-theme");var d=t?t==="dark":matchMedia("(prefers-color-scheme: dark)").matches;document.documentElement.classList.toggle("dark",d)}catch(e){}})()`,
+          }}
+        />
         <HeadContent />
       </head>
       <body>

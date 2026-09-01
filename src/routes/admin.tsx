@@ -99,7 +99,7 @@ function LoginForm() {
 
   return (
     <AdminMessage>
-      <form onSubmit={login} className="mx-auto max-w-md rounded-3xl bg-white p-8 shadow-xl">
+      <form onSubmit={login} className="mx-auto max-w-md rounded-3xl bg-card p-8 text-card-foreground shadow-xl">
         <p className="font-mono text-xs text-brand-blue">[ ACCESO PRIVADO ]</p>
         <h1 className="mt-2 text-3xl font-extrabold">Administrar propiedades</h1>
         <label className="mt-8 block text-xs font-bold uppercase">Email</label>
@@ -215,7 +215,7 @@ function PropertyManager({ email }: { email: string }) {
         <div className="flex gap-3"><Link to="/" className="rounded-xl border px-4 py-2">Ver sitio</Link><button onClick={() => void supabase?.auth.signOut()} className="rounded-xl bg-fg px-4 py-2 text-white">Cerrar sesión</button></div>
       </div>
 
-      <form onSubmit={submit} className="grid gap-5 rounded-3xl border bg-white p-6 shadow-sm md:grid-cols-2">
+      <form onSubmit={submit} className="grid gap-5 rounded-3xl border bg-card p-6 text-card-foreground shadow-sm md:grid-cols-2">
         <h2 className="md:col-span-2 text-2xl font-bold">{originalId ? "Editar propiedad" : "Agregar propiedad"}</h2>
         <Field label="Título"><input value={form.title} onChange={(e) => { update("title", e.target.value); if (!originalId) update("id", slugify(e.target.value)); }} required /></Field>
         <Field label="Identificador URL"><input value={form.id} onChange={(e) => update("id", slugify(e.target.value))} required /></Field>
@@ -235,7 +235,7 @@ function PropertyManager({ email }: { email: string }) {
         <div className="flex gap-3 md:col-span-2"><button disabled={saving || uploading} className="rounded-xl bg-brand-blue px-6 py-3 font-bold disabled:opacity-50">{saving ? "Guardando..." : "Guardar propiedad"}</button>{originalId && <button type="button" onClick={reset} className="rounded-xl border px-6 py-3">Cancelar</button>}</div>
       </form>
 
-      <section className="mt-12"><div className="mb-5 flex flex-wrap items-center justify-between gap-3"><h2 className="text-2xl font-bold">Publicaciones ({properties.length})</h2>{!loading && properties.length === 0 && <button disabled={saving} onClick={() => void importCatalog()} className="rounded-xl bg-brand-blue px-4 py-2 font-bold disabled:opacity-50">Importar catálogo inicial</button>}</div>{loading && <p>Cargando...</p>}{error && <p className="text-red-600">{error}</p>}<div className="grid gap-4">{properties.map((property) => <article key={property.id} className="flex flex-col gap-4 rounded-2xl border bg-white p-4 sm:flex-row sm:items-center"><img src={property.image} alt="" className="h-24 w-32 rounded-xl object-cover" /><div className="min-w-0 flex-1"><h3 className="font-bold">{property.title}</h3><p className="text-sm text-fg/60">{property.location} · {property.price}</p><p className="mt-1 text-xs uppercase text-fg/40">{property.published ? "Publicada" : "Borrador"}</p></div><div className="flex gap-2"><button onClick={() => edit(property)} className="rounded-xl border px-4 py-2">Editar</button><button onClick={() => void remove(property.id)} className="rounded-xl border border-red-200 px-4 py-2 text-red-600">Eliminar</button></div></article>)}</div></section>
+      <section className="mt-12"><div className="mb-5 flex flex-wrap items-center justify-between gap-3"><h2 className="text-2xl font-bold">Publicaciones ({properties.length})</h2>{!loading && properties.length === 0 && <button disabled={saving} onClick={() => void importCatalog()} className="rounded-xl bg-brand-blue px-4 py-2 font-bold disabled:opacity-50">Importar catálogo inicial</button>}</div>{loading && <p>Cargando...</p>}{error && <p className="text-red-600">{error}</p>}<div className="grid gap-4">{properties.map((property) => <article key={property.id} className="flex flex-col gap-4 rounded-2xl border bg-card p-4 text-card-foreground sm:flex-row sm:items-center"><img src={property.image} alt="" className="h-24 w-32 rounded-xl object-cover" /><div className="min-w-0 flex-1"><h3 className="font-bold">{property.title}</h3><p className="text-sm text-fg/60">{property.location} · {property.price}</p><p className="mt-1 text-xs uppercase text-fg/40">{property.published ? "Publicada" : "Borrador"}</p></div><div className="flex gap-2"><button onClick={() => edit(property)} className="rounded-xl border px-4 py-2">Editar</button><button onClick={() => void remove(property.id)} className="rounded-xl border border-red-200 px-4 py-2 text-red-600">Eliminar</button></div></article>)}</div></section>
     </main>
   );
 }

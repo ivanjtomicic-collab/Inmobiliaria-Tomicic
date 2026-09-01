@@ -18,7 +18,7 @@ export function PropertyCard({ property, delay = 0 }: { property: Property; dela
           height={1500}
           className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
         />
-        <div className="absolute top-4 left-4 rounded-full bg-white/90 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-fg backdrop-blur-sm">
+        <div className="absolute top-4 left-4 rounded-full bg-bg/90 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-fg backdrop-blur-sm">
           {property.tag}
         </div>
       </div>
