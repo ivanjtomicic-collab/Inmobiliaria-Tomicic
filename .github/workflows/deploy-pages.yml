@@ -35,8 +35,8 @@ jobs:
       - name: Build static site
         run: npm run build
         env:
-          VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
-          VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
+          VITE_SUPABASE_URL: https://iyvbohlmfvwoqeerjewe.supabase.co
+          VITE_SUPABASE_ANON_KEY: sb_publishable_GI99n_ACM-OzeaXvEkhpwA_O9gSH8Lz
 
       - name: Add GitHub Pages fallback
         run: |

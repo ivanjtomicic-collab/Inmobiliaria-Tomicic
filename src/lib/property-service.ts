@@ -47,7 +47,11 @@ export async function fetchProperties(includeUnpublished = false) {
   if (!includeUnpublished) query = query.eq("published", true);
   const { data, error } = await query;
   if (error) throw error;
-  return (data as PropertyRow[]).map(fromRow);
+  const remoteProperties = (data as PropertyRow[]).map(fromRow);
+  if (!includeUnpublished && remoteProperties.length === 0) {
+    return fallbackProperties.map((property) => ({ ...property, featured: true, published: true }));
+  }
+  return remoteProperties;
 }
 
 export function useProperties(includeUnpublished = false) {
