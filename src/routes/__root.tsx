@@ -132,7 +132,7 @@ function Footer() {
         >
           Facebook
         </a>
-        <a href="https://wa.me/5491145678900" className="hover:text-fg">WhatsApp</a>
+        <a href="https://wa.me/542364222882" className="hover:text-fg">WhatsApp</a>
       </div>
     </footer>
   );

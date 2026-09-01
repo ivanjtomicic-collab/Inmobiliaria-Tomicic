@@ -12,21 +12,21 @@ export function ContactSection({ propertyTitle }: { propertyTitle?: string }) {
             Consulta sobre <br /> tu próxima inversión.
           </h2>
           <p className="max-w-md text-lg text-white/60">
-            Nuestro equipo de expertos en Real Estate está listo para asesorarte en la compra, venta
-            o alquiler de tu propiedad en todo el país.
+            Nuestro equipo de expertos está listo para asesorarte en la compra, venta o alquiler de
+            tu propiedad en todo el país.
           </p>
           <div className="mt-12 space-y-4">
             <div className="flex items-center gap-4">
               <div className="grid size-10 shrink-0 place-items-center rounded-full border border-white/20 font-mono text-xs">
                 01
               </div>
-              <p className="font-medium">Av. del Libertador 1200, CABA</p>
+              <p className="font-medium">Aspirante Gazo 167</p>
             </div>
             <div className="flex items-center gap-4">
               <div className="grid size-10 shrink-0 place-items-center rounded-full border border-white/20 font-mono text-xs">
                 02
               </div>
-              <p className="font-medium">+54 11 4567 8900</p>
+              <p className="font-medium">+54 2364 222882</p>
             </div>
           </div>
         </div>
