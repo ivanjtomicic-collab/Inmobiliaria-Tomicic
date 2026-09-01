@@ -77,8 +77,22 @@ function Footer() {
         </span>
       </div>
       <div className="flex gap-8 text-[10px] font-bold uppercase tracking-[0.2em] text-fg/40">
-        <a href="#" className="hover:text-fg">Instagram</a>
-        <a href="#" className="hover:text-fg">LinkedIn</a>
+        <a
+          href="https://www.instagram.com/tomicicnegociosinmobiliarios/"
+          target="_blank"
+          rel="noreferrer"
+          className="hover:text-fg"
+        >
+          Instagram
+        </a>
+        <a
+          href="https://www.facebook.com/search/top?q=tomicic%20negocios%20inmobiliarios&locale=es_LA"
+          target="_blank"
+          rel="noreferrer"
+          className="hover:text-fg"
+        >
+          Facebook
+        </a>
         <a href="https://wa.me/5491145678900" className="hover:text-fg">WhatsApp</a>
       </div>
     </footer>
