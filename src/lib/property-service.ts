@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { properties as fallbackProperties, type Property } from "./properties";
-import { isSupabaseConfigured, supabase } from "./supabase";
+
+const supabaseUrl = import.meta.env["VITE_SUPABASE_URL"];
+const supabaseAnonKey = import.meta.env["VITE_SUPABASE_ANON_KEY"];
+const isSupabaseConfigured = Boolean(supabaseUrl && supabaseAnonKey);
 
 export interface PropertyInput {
   id: string;
@@ -21,6 +24,16 @@ export interface PropertyInput {
 }
 
 type PropertyRow = Omit<PropertyInput, "image"> & { image_url: string };
+type PublicProperty = Property & { featured: boolean; published: boolean };
+
+let publicPropertiesCache: PublicProperty[] | null = null;
+let publicPropertiesCachedAt = 0;
+const PUBLIC_CACHE_MS = 60_000;
+
+const clearPublicPropertiesCache = () => {
+  publicPropertiesCache = null;
+  publicPropertiesCachedAt = 0;
+};
 
 const fromRow = (row: PropertyRow): Property & { featured: boolean; published: boolean } => ({
   id: row.id,
@@ -41,16 +54,41 @@ const fromRow = (row: PropertyRow): Property & { featured: boolean; published: b
 });
 
 export async function fetchProperties(includeUnpublished = false) {
-  if (!supabase) return fallbackProperties.map((property) => ({ ...property, featured: true, published: true }));
-
-  let query = supabase.from("properties").select("*").order("created_at", { ascending: false });
-  if (!includeUnpublished) query = query.eq("published", true);
-  const { data, error } = await query;
-  if (error) throw error;
-  const remoteProperties = (data as PropertyRow[]).map(fromRow);
-  if (!includeUnpublished && remoteProperties.length === 0) {
+  if (!isSupabaseConfigured) {
     return fallbackProperties.map((property) => ({ ...property, featured: true, published: true }));
   }
+
+  if (includeUnpublished) {
+    const { supabase } = await import("./supabase");
+    if (!supabase) return [];
+    const { data, error } = await supabase
+      .from("properties")
+      .select("*")
+      .order("created_at", { ascending: false });
+    if (error) throw error;
+    return (data as PropertyRow[]).map(fromRow);
+  }
+
+  if (publicPropertiesCache && Date.now() - publicPropertiesCachedAt < PUBLIC_CACHE_MS) {
+    return publicPropertiesCache;
+  }
+
+  const response = await fetch(
+    `${supabaseUrl}/rest/v1/properties?select=*&published=eq.true&order=created_at.desc`,
+    {
+      headers: {
+        apikey: supabaseAnonKey,
+        Authorization: `Bearer ${supabaseAnonKey}`,
+      },
+    },
+  );
+  if (!response.ok) throw new Error("No se pudo consultar el catálogo.");
+  const remoteProperties = ((await response.json()) as PropertyRow[]).map(fromRow);
+  if (remoteProperties.length === 0) {
+    return fallbackProperties.map((property) => ({ ...property, featured: true, published: true }));
+  }
+  publicPropertiesCache = remoteProperties;
+  publicPropertiesCachedAt = Date.now();
   return remoteProperties;
 }
 
@@ -83,6 +121,7 @@ export function useProperties(includeUnpublished = false) {
 }
 
 export async function saveProperty(input: PropertyInput, originalId?: string) {
+  const { supabase } = await import("./supabase");
   if (!supabase) throw new Error("Supabase todavía no está configurado.");
   const row: PropertyRow = {
     id: input.id,
@@ -107,15 +146,19 @@ export async function saveProperty(input: PropertyInput, originalId?: string) {
     : supabase.from("properties").insert(row);
   const { error } = await query;
   if (error) throw error;
+  clearPublicPropertiesCache();
 }
 
 export async function deleteProperty(id: string) {
+  const { supabase } = await import("./supabase");
   if (!supabase) throw new Error("Supabase todavía no está configurado.");
   const { error } = await supabase.from("properties").delete().eq("id", id);
   if (error) throw error;
+  clearPublicPropertiesCache();
 }
 
 export async function importFallbackProperties() {
+  const { supabase } = await import("./supabase");
   if (!supabase) throw new Error("Supabase todavía no está configurado.");
   const rows: PropertyRow[] = fallbackProperties.map((property, index) => ({
     id: property.id,
@@ -136,9 +179,11 @@ export async function importFallbackProperties() {
   }));
   const { error } = await supabase.from("properties").upsert(rows);
   if (error) throw error;
+  clearPublicPropertiesCache();
 }
 
 export async function uploadPropertyImage(file: File) {
+  const { supabase } = await import("./supabase");
   if (!supabase) throw new Error("Supabase todavía no está configurado.");
   const extension = file.name.split(".").pop()?.toLowerCase() || "jpg";
   const path = `${crypto.randomUUID()}.${extension}`;

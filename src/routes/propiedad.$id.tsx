@@ -61,6 +61,8 @@ function PropiedadDetalle() {
               alt={property.title}
               width={1200}
               height={1500}
+              decoding="async"
+              fetchPriority="high"
               className="h-full w-full object-cover"
             />
             <div className="absolute top-4 left-4 rounded-full bg-bg/90 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-fg backdrop-blur-sm">
