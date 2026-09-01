@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { PropertyCard } from "@/components/PropertyCard";
 import { ContactSection } from "@/components/ContactSection";
@@ -84,12 +84,13 @@ function HomePage() {
             <p className="mb-2 font-mono text-sm text-brand-blue">[ CATÁLOGO 2026 ]</p>
             <h2 className="text-3xl font-bold tracking-tight">Propiedades Destacadas</h2>
           </div>
-          <a
-            href="/propiedades"
+          <Link
+            to="/propiedades"
+            search={{}}
             className="hidden rounded-full border border-fg/10 px-4 py-1 text-xs font-bold uppercase transition-colors hover:bg-brand-blue/10 sm:block"
           >
             Ver todas
-          </a>
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
