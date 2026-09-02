@@ -39,6 +39,8 @@ export default defineConfig({
       { path: pagePath() },
       { path: pagePath("propiedades") },
       { path: pagePath("contacto") },
+      { path: pagePath("tasaciones") },
+      { path: pagePath("acerca-de") },
       { path: pagePath("admin") },
       ...propertyIds.map((id) => ({ path: pagePath(`propiedad/${id}`) })),
     ],

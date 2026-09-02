@@ -10,14 +10,21 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AcercaDeRouteImport } from './routes/acerca-de'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as ContactoRouteImport } from './routes/contacto'
 import { Route as PropiedadesRouteImport } from './routes/propiedades'
+import { Route as TasacionesRouteImport } from './routes/tasaciones'
 import { Route as PropiedadIdRouteImport } from './routes/propiedad.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AcercaDeRoute = AcercaDeRouteImport.update({
+  id: '/acerca-de',
+  path: '/acerca-de',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminRoute = AdminRouteImport.update({
@@ -35,6 +42,11 @@ const PropiedadesRoute = PropiedadesRouteImport.update({
   path: '/propiedades',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TasacionesRoute = TasacionesRouteImport.update({
+  id: '/tasaciones',
+  path: '/tasaciones',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PropiedadIdRoute = PropiedadIdRouteImport.update({
   id: '/propiedad/$id',
   path: '/propiedad/$id',
@@ -43,45 +55,69 @@ const PropiedadIdRoute = PropiedadIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/acerca-de': typeof AcercaDeRoute
   '/admin': typeof AdminRoute
   '/contacto': typeof ContactoRoute
   '/propiedades': typeof PropiedadesRoute
+  '/tasaciones': typeof TasacionesRoute
   '/propiedad/$id': typeof PropiedadIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/acerca-de': typeof AcercaDeRoute
   '/admin': typeof AdminRoute
   '/contacto': typeof ContactoRoute
   '/propiedades': typeof PropiedadesRoute
+  '/tasaciones': typeof TasacionesRoute
   '/propiedad/$id': typeof PropiedadIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/acerca-de': typeof AcercaDeRoute
   '/admin': typeof AdminRoute
   '/contacto': typeof ContactoRoute
   '/propiedades': typeof PropiedadesRoute
+  '/tasaciones': typeof TasacionesRoute
   '/propiedad/$id': typeof PropiedadIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/admin' | '/contacto' | '/propiedades' | '/propiedad/$id'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/admin' | '/contacto' | '/propiedades' | '/propiedad/$id'
-  id:
-    | '__root__'
+  fullPaths:
     | '/'
+    | '/acerca-de'
     | '/admin'
     | '/contacto'
     | '/propiedades'
+    | '/tasaciones'
+    | '/propiedad/$id'
+  fileRoutesByTo: FileRoutesByTo
+  to:
+    | '/'
+    | '/acerca-de'
+    | '/admin'
+    | '/contacto'
+    | '/propiedades'
+    | '/tasaciones'
+    | '/propiedad/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/acerca-de'
+    | '/admin'
+    | '/contacto'
+    | '/propiedades'
+    | '/tasaciones'
     | '/propiedad/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AcercaDeRoute: typeof AcercaDeRoute
   AdminRoute: typeof AdminRoute
   ContactoRoute: typeof ContactoRoute
   PropiedadesRoute: typeof PropiedadesRoute
+  TasacionesRoute: typeof TasacionesRoute
   PropiedadIdRoute: typeof PropiedadIdRoute
 }
 
@@ -92,6 +128,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/acerca-de': {
+      id: '/acerca-de'
+      path: '/acerca-de'
+      fullPath: '/acerca-de'
+      preLoaderRoute: typeof AcercaDeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin': {
@@ -115,6 +158,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PropiedadesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tasaciones': {
+      id: '/tasaciones'
+      path: '/tasaciones'
+      fullPath: '/tasaciones'
+      preLoaderRoute: typeof TasacionesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/propiedad/$id': {
       id: '/propiedad/$id'
       path: '/propiedad/$id'
@@ -127,9 +177,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AcercaDeRoute: AcercaDeRoute,
   AdminRoute: AdminRoute,
   ContactoRoute: ContactoRoute,
   PropiedadesRoute: PropiedadesRoute,
+  TasacionesRoute: TasacionesRoute,
   PropiedadIdRoute: PropiedadIdRoute,
 }
 export const routeTree = rootRouteImport

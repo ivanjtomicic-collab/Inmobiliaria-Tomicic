@@ -7,16 +7,16 @@ import { useProperties } from "@/lib/property-service";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Inmobiliaria Tomicic — Casas, Terrenos y Alquileres en Argentina" },
+      { title: "Inmobiliaria Tomicic — Casas, Lotes y Alquileres en Argentina" },
       {
         name: "description",
         content:
-          "Encontrá casas, terrenos y departamentos en venta y alquiler. Inmobiliaria Tomicic: arquitectura que define tu futuro.",
+          "Encontrá casas, lotes y departamentos en venta y alquiler. Inmobiliaria Tomicic: inversiones que definen tu futuro.",
       },
       { property: "og:title", content: "Inmobiliaria Tomicic" },
       {
         property: "og:description",
-        content: "Casas, terrenos y alquileres en Argentina. Arquitectura que define tu futuro.",
+        content: "Casas, lotes y alquileres en Argentina. Inversiones que definen tu futuro.",
       },
     ],
   }),
@@ -36,7 +36,7 @@ function HomePage() {
       {/* Hero */}
       <section className="mx-auto max-w-7xl animate-fade-up px-6 pt-20 pb-12 text-center">
         <h1 className="mb-8 text-5xl leading-[0.9] font-extrabold tracking-tight text-balance md:text-7xl">
-          Arquitectura que <br /> define tu <span className="text-brand-blue">futuro.</span>
+          Inversiones que <br /> definen tu <span className="text-brand-blue">futuro.</span>
         </h1>
 
         <form
@@ -60,7 +60,7 @@ function HomePage() {
           >
             <option value="">Todo tipo</option>
             <option value="casa">Casas</option>
-            <option value="terreno">Terrenos</option>
+            <option value="terreno">Lotes</option>
             <option value="alquiler">Alquileres</option>
           </select>
           <input

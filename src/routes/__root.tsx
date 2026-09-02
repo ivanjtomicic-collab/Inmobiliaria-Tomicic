@@ -30,8 +30,10 @@ function Logo({ className = "size-8" }: { className?: string }) {
 
 const navLinks = [
   { to: "/propiedades", label: "Propiedades" },
-  { to: "/propiedades", label: "Terrenos", search: { tipo: "terreno" } },
+  { to: "/propiedades", label: "Lotes", search: { tipo: "terreno" } },
   { to: "/propiedades", label: "Alquileres", search: { operacion: "alquiler" } },
+  { to: "/tasaciones", label: "Tasaciones" },
+  { to: "/acerca-de", label: "Acerca de" },
   { to: "/contacto", label: "Contacto" },
 ] as const;
 
@@ -56,14 +58,23 @@ function Header() {
             </Link>
           ))}
         </div>
-        <div className="flex gap-4 text-xs font-medium uppercase tracking-widest text-fg/60 md:hidden">
-          <Link to="/propiedades" className="transition-colors hover:text-brand-blue">
-            Propiedades
-          </Link>
-          <Link to="/contacto" className="hidden transition-colors hover:text-brand-blue sm:block">
-            Contacto
-          </Link>
-        </div>
+        <details className="group relative md:hidden">
+          <summary className="cursor-pointer list-none text-xs font-medium uppercase tracking-widest text-fg/60">
+            Menú
+          </summary>
+          <div className="absolute top-8 right-0 flex w-52 flex-col rounded-2xl bg-bg p-3 text-xs font-medium uppercase tracking-widest text-fg shadow-xl ring-1 ring-fg/10">
+            {navLinks.map((l) => (
+              <Link
+                key={l.label}
+                to={l.to}
+                search={"search" in l ? l.search : {}}
+                className="rounded-lg px-3 py-3 transition-colors hover:bg-brand-blue/10"
+              >
+                {l.label}
+              </Link>
+            ))}
+          </div>
+        </details>
         <ThemeToggle />
       </div>
     </nav>
@@ -202,16 +213,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Inmobiliaria Tomicic — Propiedades, Terrenos y Alquileres" },
+      { title: "Inmobiliaria Tomicic — Propiedades, Lotes y Alquileres" },
       {
         name: "description",
         content:
-          "Inmobiliaria Tomicic: casas, terrenos y departamentos en venta y alquiler en Argentina. Asesoramiento profesional en tu próxima inversión.",
+          "Inmobiliaria Tomicic: casas, lotes y departamentos en venta y alquiler en Argentina. Asesoramiento profesional en tu próxima inversión.",
       },
       { property: "og:title", content: "Inmobiliaria Tomicic" },
       {
         property: "og:description",
-        content: "Casas, terrenos y alquileres en Argentina. Asesoramiento inmobiliario profesional.",
+        content: "Casas, lotes y alquileres en Argentina. Asesoramiento inmobiliario profesional.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

@@ -51,9 +51,9 @@ export const properties: Property[] = [
     image: terrenoBariloche,
     surface: "2.500 m²",
     extras: ["Servicios", "Escritura inmediata", "Vista a la montaña"],
-    tag: "Terreno • Oportunidad",
+    tag: "Lote • Oportunidad",
     description:
-      "Terreno plano con vista abierta a la cordillera, a minutos del centro de Bariloche. Todos los servicios en la puerta: agua, luz, gas y cloacas. Escritura inmediata, ideal para proyecto residencial o inversión.",
+      "Lote plano con vista abierta a la cordillera, a minutos del centro de Bariloche. Todos los servicios en la puerta: agua, luz, gas y cloacas. Escritura inmediata, ideal para proyecto residencial o inversión.",
   },
   {
     id: "torre-madero-view",
@@ -97,7 +97,7 @@ export const properties: Property[] = [
     image: terrenoPilar,
     surface: "840 m²",
     extras: ["Barrio cerrado", "Servicios", "Expensas bajas"],
-    tag: "Terreno • Venta",
+    tag: "Lote • Venta",
     description:
       "Lote interno en barrio cerrado consolidado de la zona norte. Entorno arbolado, seguridad permanente y expensas bajas. Apto para construir de inmediato con todos los servicios disponibles.",
   },

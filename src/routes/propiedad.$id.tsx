@@ -39,7 +39,7 @@ function PropiedadDetalle() {
     property.rooms && { label: "Ambientes", value: property.rooms },
     property.baths && { label: "Baños", value: property.baths },
     { label: "Operación", value: property.operation === "venta" ? "Venta" : "Alquiler" },
-    { label: "Tipo", value: property.type },
+    { label: "Tipo", value: property.type === "terreno" ? "lote" : property.type },
     { label: "Ubicación", value: property.location },
   ].filter(Boolean) as { label: string; value: string }[];
 

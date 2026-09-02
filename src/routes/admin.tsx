@@ -219,7 +219,7 @@ function PropertyManager({ email }: { email: string }) {
         <h2 className="md:col-span-2 text-2xl font-bold">{originalId ? "Editar propiedad" : "Agregar propiedad"}</h2>
         <Field label="Título"><input value={form.title} onChange={(e) => { update("title", e.target.value); if (!originalId) update("id", slugify(e.target.value)); }} required /></Field>
         <Field label="Identificador URL"><input value={form.id} onChange={(e) => update("id", slugify(e.target.value))} required /></Field>
-        <Field label="Tipo"><select value={form.type} onChange={(e) => update("type", e.target.value as PropertyInput["type"])}><option value="casa">Casa</option><option value="terreno">Terreno</option><option value="departamento">Departamento</option></select></Field>
+        <Field label="Tipo"><select value={form.type} onChange={(e) => update("type", e.target.value as PropertyInput["type"])}><option value="casa">Casa</option><option value="terreno">Lote</option><option value="departamento">Departamento</option></select></Field>
         <Field label="Operación"><select value={form.operation} onChange={(e) => update("operation", e.target.value as PropertyInput["operation"])}><option value="venta">Venta</option><option value="alquiler">Alquiler</option></select></Field>
         <Field label="Precio"><input value={form.price} onChange={(e) => update("price", e.target.value)} required placeholder="USD 150.000" /></Field>
         <Field label="Ubicación"><input value={form.location} onChange={(e) => update("location", e.target.value)} required /></Field>

@@ -1,8 +1,14 @@
-import { useState } from "react";
 import { toast } from "sonner";
 
-export function ContactSection({ propertyTitle }: { propertyTitle?: string }) {
-  const [sent, setSent] = useState(false);
+const CONTACT_EMAIL = "inmobiliariatomicic@gmail.com";
+
+export function ContactSection({
+  propertyTitle,
+  defaultInterest,
+}: {
+  propertyTitle?: string;
+  defaultInterest?: string;
+}) {
 
   return (
     <section id="contacto" className="bg-brand-gray px-6 py-24 text-white">
@@ -34,8 +40,18 @@ export function ContactSection({ propertyTitle }: { propertyTitle?: string }) {
           className="flex flex-col gap-6 rounded-3xl bg-bg p-8 text-fg"
           onSubmit={(e) => {
             e.preventDefault();
-            setSent(true);
-            toast.success("Consulta enviada. Te contactaremos a la brevedad.");
+            const form = new FormData(e.currentTarget);
+            const nombre = String(form.get("nombre") ?? "");
+            const email = String(form.get("email") ?? "");
+            const interes = String(form.get("interes") ?? "Consulta inmobiliaria");
+            const mensaje = String(form.get("mensaje") ?? "");
+            const subject = encodeURIComponent(`${interes} - Consulta de ${nombre}`);
+            const body = encodeURIComponent(
+              `Nombre: ${nombre}\nEmail: ${email}\nInterés: ${interes}\n\nMensaje:\n${mensaje}`,
+            );
+
+            window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+            toast.success("Abrimos tu aplicación de correo para completar el envío.");
           }}
         >
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -45,6 +61,7 @@ export function ContactSection({ propertyTitle }: { propertyTitle?: string }) {
               </label>
               <input
                 id="nombre"
+                name="nombre"
                 required
                 type="text"
                 className="rounded-xl border border-fg/5 bg-bg p-4 outline-none ring-brand-blue/20 focus:ring-2"
@@ -56,6 +73,7 @@ export function ContactSection({ propertyTitle }: { propertyTitle?: string }) {
               </label>
               <input
                 id="email"
+                name="email"
                 required
                 type="email"
                 className="rounded-xl border border-fg/5 bg-bg p-4 outline-none ring-brand-blue/20 focus:ring-2"
@@ -68,6 +86,8 @@ export function ContactSection({ propertyTitle }: { propertyTitle?: string }) {
             </label>
             <select
               id="interes"
+              name="interes"
+              defaultValue={defaultInterest}
               className="rounded-xl border border-fg/5 bg-bg p-4 outline-none ring-brand-blue/20 focus:ring-2"
             >
               <option>Comprar una propiedad</option>
@@ -82,6 +102,7 @@ export function ContactSection({ propertyTitle }: { propertyTitle?: string }) {
             </label>
             <textarea
               id="mensaje"
+              name="mensaje"
               rows={4}
               defaultValue={propertyTitle ? `Hola, me interesa la propiedad "${propertyTitle}".` : ""}
               className="resize-none rounded-xl border border-fg/5 bg-bg p-4 outline-none ring-brand-blue/20 focus:ring-2"
@@ -91,8 +112,11 @@ export function ContactSection({ propertyTitle }: { propertyTitle?: string }) {
             type="submit"
             className="w-full rounded-2xl bg-brand-blue py-5 font-bold uppercase tracking-tighter text-fg transition-all hover:bg-brand-blue/80"
           >
-            {sent ? "Consulta enviada ✓" : "Enviar Consulta"}
+            Enviar Consulta
           </button>
+          <p className="text-center text-xs text-fg/50">
+            La consulta se enviará a {CONTACT_EMAIL}.
+          </p>
         </form>
       </div>
     </section>

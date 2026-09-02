@@ -18,12 +18,12 @@ export const Route = createFileRoute("/propiedades")({
       {
         name: "description",
         content:
-          "Catálogo completo de casas, terrenos y departamentos en venta y alquiler. Filtrá por tipo, operación y ubicación.",
+          "Catálogo completo de casas, lotes y departamentos en venta y alquiler. Filtrá por tipo, operación y ubicación.",
       },
       { property: "og:title", content: "Propiedades — Inmobiliaria Tomicic" },
       {
         property: "og:description",
-        content: "Catálogo de casas, terrenos y alquileres disponibles en Argentina.",
+        content: "Catálogo de casas, lotes y alquileres disponibles en Argentina.",
       },
     ],
   }),
@@ -33,7 +33,7 @@ export const Route = createFileRoute("/propiedades")({
 const tipoFilters = [
   { value: undefined, label: "Todas" },
   { value: "casa", label: "Casas" },
-  { value: "terreno", label: "Terrenos" },
+  { value: "terreno", label: "Lotes" },
   { value: "alquiler", label: "Alquileres" },
 ] as const;
 
