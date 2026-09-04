@@ -44,8 +44,8 @@ function Header() {
         <Logo />
         <span className="text-xl font-extrabold uppercase tracking-tighter text-fg">Tomicic</span>
       </Link>
-      <div className="flex items-center gap-4 md:gap-8">
-        <div className="hidden gap-8 text-sm font-medium uppercase tracking-widest text-fg/60 md:flex">
+      <div className="flex items-center gap-4 lg:gap-8">
+        <div className="hidden gap-8 text-sm font-medium uppercase tracking-widest text-fg/60 lg:flex">
           {navLinks.map((l) => (
             <Link
               key={l.label}
@@ -58,11 +58,11 @@ function Header() {
             </Link>
           ))}
         </div>
-        <details className="group relative md:hidden">
+        <details className="group relative lg:hidden">
           <summary className="cursor-pointer list-none text-xs font-medium uppercase tracking-widest text-fg/60">
             Menú
           </summary>
-          <div className="absolute top-8 right-0 flex w-52 flex-col rounded-2xl bg-bg p-3 text-xs font-medium uppercase tracking-widest text-fg shadow-xl ring-1 ring-fg/10">
+          <div className="absolute top-8 right-0 flex max-h-[calc(100vh-6rem)] w-52 flex-col overflow-y-auto rounded-2xl bg-bg p-3 text-xs font-medium uppercase tracking-widest text-fg shadow-xl ring-1 ring-fg/10">
             {navLinks.map((l) => (
               <Link
                 key={l.label}
@@ -160,7 +160,7 @@ function NotFoundComponent() {
         <div className="mt-6">
           <Link
             to="/"
-            className="inline-flex items-center justify-center rounded-xl bg-brand-gray px-6 py-3 text-sm font-bold uppercase tracking-tighter text-white transition-colors hover:bg-fg"
+            className="inline-flex items-center justify-center rounded-xl bg-brand-gray px-6 py-3 text-sm font-bold uppercase tracking-tighter text-brand-contrast transition-colors hover:bg-brand-gray/85"
           >
             Volver al inicio
           </Link>

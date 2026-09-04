@@ -72,7 +72,7 @@ function HomePage() {
           />
           <button
             type="submit"
-            className="rounded-xl bg-brand-gray px-8 py-3 font-bold uppercase tracking-tighter text-white transition-all hover:bg-fg"
+            className="rounded-xl bg-brand-gray px-8 py-3 font-bold uppercase tracking-tighter text-brand-contrast transition-all hover:bg-brand-gray/85"
           >
             Buscar
           </button>

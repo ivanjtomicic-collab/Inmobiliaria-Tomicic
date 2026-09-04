@@ -26,7 +26,7 @@ function PropiedadDetalle() {
         <Link
           to="/propiedades"
           search={{}}
-          className="mt-8 inline-block rounded-xl bg-fg px-6 py-3 text-white"
+          className="mt-8 inline-block rounded-xl bg-fg px-6 py-3 text-bg"
         >
           Ver propiedades
         </Link>

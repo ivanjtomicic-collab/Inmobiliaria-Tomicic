@@ -54,7 +54,7 @@ function AcercaDePage() {
           </div>
           <Link
             to="/contacto"
-            className="mt-8 inline-flex rounded-xl bg-brand-gray px-6 py-3 text-sm font-bold uppercase tracking-tighter text-white transition-colors hover:bg-fg"
+            className="mt-8 inline-flex rounded-xl bg-brand-gray px-6 py-3 text-sm font-bold uppercase tracking-tighter text-brand-contrast transition-colors hover:bg-brand-gray/85"
           >
             Contactanos
           </Link>

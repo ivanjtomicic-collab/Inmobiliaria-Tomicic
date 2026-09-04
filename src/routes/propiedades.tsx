@@ -74,7 +74,7 @@ function PropiedadesPage() {
                 navigate({ search: { ...search, tipo: f.value }, replace: true })
               }
               className={`rounded-full border border-fg/10 px-4 py-1 text-xs font-bold uppercase transition-colors ${
-                active ? "bg-fg text-white" : "hover:bg-brand-blue/10"
+                active ? "bg-fg text-bg" : "hover:bg-brand-blue/10"
               }`}
             >
               {f.label}

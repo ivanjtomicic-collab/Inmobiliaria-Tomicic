@@ -106,7 +106,7 @@ function LoginForm() {
         <input className="mt-2 w-full rounded-xl border p-3" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
         <label className="mt-4 block text-xs font-bold uppercase">Contraseña</label>
         <input className="mt-2 w-full rounded-xl border p-3" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-        <button disabled={loading} className="mt-6 w-full rounded-xl bg-fg py-3 font-bold text-white disabled:opacity-50">
+        <button disabled={loading} className="mt-6 w-full rounded-xl bg-fg py-3 font-bold text-bg disabled:opacity-50">
           {loading ? "Ingresando..." : "Ingresar"}
         </button>
       </form>
@@ -212,7 +212,7 @@ function PropertyManager({ email }: { email: string }) {
     <main className="mx-auto max-w-7xl px-6 py-12">
       <div className="mb-10 flex flex-wrap items-center justify-between gap-4">
         <div><p className="font-mono text-xs text-brand-blue">[ PANEL PRIVADO ]</p><h1 className="text-4xl font-extrabold">Propiedades</h1><p className="text-sm text-fg/50">{email}</p></div>
-        <div className="flex gap-3"><Link to="/" className="rounded-xl border px-4 py-2">Ver sitio</Link><button onClick={() => void supabase?.auth.signOut()} className="rounded-xl bg-fg px-4 py-2 text-white">Cerrar sesión</button></div>
+        <div className="flex gap-3"><Link to="/" className="rounded-xl border px-4 py-2">Ver sitio</Link><button onClick={() => void supabase?.auth.signOut()} className="rounded-xl bg-fg px-4 py-2 text-bg">Cerrar sesión</button></div>
       </div>
 
       <form onSubmit={submit} className="grid gap-5 rounded-3xl border bg-card p-6 text-card-foreground shadow-sm md:grid-cols-2">
