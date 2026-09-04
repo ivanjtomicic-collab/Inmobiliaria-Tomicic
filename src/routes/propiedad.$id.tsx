@@ -114,7 +114,7 @@ function PropiedadDetalle() {
         </div>
       </section>
 
-      <ContactSection propertyTitle={property.title} />
+      <ContactSection propertyId={property.id} propertyTitle={property.title} />
     </>
   );
 }

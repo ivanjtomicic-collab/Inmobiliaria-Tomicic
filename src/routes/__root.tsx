@@ -11,6 +11,7 @@ import { useEffect, useState, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { WhatsAppButton } from "../components/WhatsAppButton";
 
 const tomicicLogo = `${import.meta.env.BASE_URL}branding/tomicic-logo.jpg`;
 
@@ -275,6 +276,7 @@ function RootComponent() {
         <Header />
         <Outlet />
         <Footer />
+        <WhatsAppButton />
       </div>
       <Toaster />
     </>
