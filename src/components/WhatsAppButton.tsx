@@ -1,5 +1,5 @@
 const WHATSAPP_URL =
-  "https://wa.me/542364222882?text=Hola%2C%20quisiera%20hacer%20una%20consulta%20inmobiliaria.";
+  "https://wa.me/5492475413001?text=Hola%2C%20quisiera%20hacer%20una%20consulta%20inmobiliaria.";
 
 export function WhatsAppButton() {
   return (

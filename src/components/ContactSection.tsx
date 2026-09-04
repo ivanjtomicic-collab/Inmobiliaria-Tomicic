@@ -112,7 +112,7 @@ export function ContactSection({
               <div className="grid size-10 shrink-0 place-items-center rounded-full border border-brand-contrast/25 font-mono text-xs">
                 02
               </div>
-              <p className="font-medium">+54 2364 222882</p>
+              <p className="font-medium">+54 9 2475 41-3001</p>
             </div>
           </div>
         </div>
