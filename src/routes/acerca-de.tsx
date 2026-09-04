@@ -22,16 +22,36 @@ function AcercaDePage() {
           Tu proyecto inmobiliario, acompañado de cerca.
         </h1>
         <div className="rounded-3xl bg-card p-8 shadow-xl shadow-fg/5 ring-1 ring-fg/5">
-          {/* Reemplazá estos párrafos con la historia y la información de la inmobiliaria. */}
-          <h2 className="text-2xl font-bold">Inmobiliaria Tomicic</h2>
-          <p className="mt-5 leading-relaxed text-fg/65">
-            En este espacio podés contar quiénes son, su trayectoria, sus valores y la experiencia
-            que ofrecen a cada cliente.
-          </p>
-          <p className="mt-4 leading-relaxed text-fg/65">
-            También podés sumar información sobre las zonas en las que trabajan y qué distingue su
-            servicio en operaciones de compra, venta, alquiler y tasación.
-          </p>
+          <h2 className="text-2xl font-bold">Tomicic Negocios Inmobiliarios</h2>
+          <div className="mt-5 space-y-4 leading-relaxed text-fg/65">
+            <p>
+              Somos Tomicic Negocios Inmobiliarios. Nuestro trabajo es la gestión inmobiliaria
+              (compra, ventas, alquileres, tasaciones), y buscamos hacerlo conectando nuestro
+              conocimiento con las nuevas ideas teniendo como principal meta la excelencia
+              profesional.
+            </p>
+            <p>
+              Nuestro objetivo es prestar el más amplio rango de servicios inmobiliarios y
+              ofrecerte un lugar donde te sientas cómodo y seguro a la hora de realizar
+              operaciones. Porque sabemos que detrás de ellas están tus sueños, tus proyectos,
+              tus metas.
+            </p>
+            <p>
+              Los que hacemos Tomicic Negocios Inmobiliarios te vamos a acompañar en ese camino.
+              Porque entendemos de negocios inmobiliarios, pero además ponemos nuestra integridad,
+              consistencia y calidad a tu servicio.
+            </p>
+            <p>
+              Creemos fuertemente que la manera de trabajar es generando igualdad de oportunidades,
+              consolidando las relaciones con nuestros clientes y colegas. Somos una inmobiliaria
+              independiente que se compromete con su entorno, para satisfacer las necesidades de
+              cada cliente.
+            </p>
+            <p>
+              En Tomicic Negocios Inmobiliarios, vas a poder cumplir tus sueños sin miedo con el
+              mejor asesoramiento profesional.
+            </p>
+          </div>
           <Link
             to="/contacto"
             className="mt-8 inline-flex rounded-xl bg-brand-gray px-6 py-3 text-sm font-bold uppercase tracking-tighter text-white transition-colors hover:bg-fg"
