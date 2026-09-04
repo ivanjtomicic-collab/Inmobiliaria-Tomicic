@@ -7,7 +7,7 @@ import { useProperties } from "@/lib/property-service";
 const searchSchema = z.object({
   tipo: z.enum(["casa", "terreno", "departamento", "alquiler"]).optional(),
   operacion: z.enum(["venta", "alquiler"]).optional(),
-  q: z.string().optional(),
+  q: z.string().trim().max(100).optional(),
 });
 
 export const Route = createFileRoute("/propiedades")({
@@ -106,7 +106,7 @@ function PropiedadesPage() {
       ) : (
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {filtered.map((p, i) => (
-            <PropertyCard key={p.id} property={p} delay={i * 80} />
+            <PropertyCard key={p.id} property={p} delay={i * 80} priority={i === 0} />
           ))}
         </div>
       )}

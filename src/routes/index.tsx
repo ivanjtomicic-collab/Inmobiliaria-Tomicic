@@ -104,7 +104,7 @@ function HomePage() {
         ) : (
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             {featured.map((p, i) => (
-              <PropertyCard key={p.id} property={p} delay={(i + 1) * 100} />
+              <PropertyCard key={p.id} property={p} delay={(i + 1) * 100} priority={i === 0} />
             ))}
           </div>
         )}

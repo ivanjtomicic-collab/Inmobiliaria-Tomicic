@@ -1,7 +1,15 @@
 import { Link } from "@tanstack/react-router";
 import type { Property } from "@/lib/properties";
 
-export function PropertyCard({ property, delay = 0 }: { property: Property; delay?: number }) {
+export function PropertyCard({
+  property,
+  delay = 0,
+  priority = false,
+}: {
+  property: Property;
+  delay?: number;
+  priority?: boolean;
+}) {
   return (
     <Link
       to="/propiedad/$id"
@@ -13,7 +21,8 @@ export function PropertyCard({ property, delay = 0 }: { property: Property; dela
         <img
           src={property.image}
           alt={property.title}
-          loading="lazy"
+          loading={priority ? "eager" : "lazy"}
+          fetchPriority={priority ? "high" : "auto"}
           decoding="async"
           sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
           width={1200}

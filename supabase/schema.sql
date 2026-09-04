@@ -7,18 +7,18 @@ create table if not exists public.admin_users (
 
 create table if not exists public.properties (
   id text primary key check (id ~ '^[a-z0-9]+(?:-[a-z0-9]+)*$'),
-  title text not null,
+  title text not null check (char_length(title) between 1 and 160),
   type text not null check (type in ('casa', 'terreno', 'departamento')),
   operation text not null check (operation in ('venta', 'alquiler')),
-  price text not null,
-  location text not null,
-  image_url text not null,
+  price text not null check (char_length(price) between 1 and 80),
+  location text not null check (char_length(location) between 1 and 200),
+  image_url text not null check (char_length(image_url) <= 2048 and (image_url like 'https://%' or image_url like '/%')),
   surface text not null default '',
   rooms text not null default '',
   baths text not null default '',
   extras text[] not null default '{}',
   tag text not null default '',
-  description text not null,
+  description text not null check (char_length(description) between 1 and 5000),
   featured boolean not null default false,
   published boolean not null default true,
   created_at timestamptz not null default now(),
@@ -86,9 +86,18 @@ on public.properties for delete
 to authenticated
 using (public.is_admin());
 
-insert into storage.buckets (id, name, public)
-values ('property-images', 'property-images', true)
-on conflict (id) do update set public = true;
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values (
+  'property-images',
+  'property-images',
+  true,
+  8388608,
+  array['image/jpeg', 'image/png', 'image/webp']
+)
+on conflict (id) do update set
+  public = true,
+  file_size_limit = excluded.file_size_limit,
+  allowed_mime_types = excluded.allowed_mime_types;
 
 drop policy if exists "Public property images" on storage.objects;
 create policy "Public property images"

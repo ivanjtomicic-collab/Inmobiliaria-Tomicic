@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { z } from "zod";
 import { properties as fallbackProperties, type Property } from "./properties";
 
 const supabaseUrl = import.meta.env["VITE_SUPABASE_URL"];
@@ -25,6 +26,36 @@ export interface PropertyInput {
 
 type PropertyRow = Omit<PropertyInput, "image"> & { image_url: string };
 type PublicProperty = Property & { featured: boolean; published: boolean };
+
+const safeImageUrl = z.string().max(2048).refine((value) => {
+  if (value.startsWith("/")) return !value.startsWith("//");
+  try {
+    return new URL(value).protocol === "https:";
+  } catch {
+    return false;
+  }
+}, "La imagen debe usar una URL HTTPS válida.");
+
+const propertyInputSchema = z.object({
+  id: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/).max(120),
+  title: z.string().trim().min(1).max(160),
+  type: z.enum(["casa", "terreno", "departamento"]),
+  operation: z.enum(["venta", "alquiler"]),
+  price: z.string().trim().min(1).max(80),
+  location: z.string().trim().min(1).max(200),
+  image: safeImageUrl,
+  surface: z.string().trim().max(80),
+  rooms: z.string().trim().max(80),
+  baths: z.string().trim().max(80),
+  extras: z.array(z.string().trim().min(1).max(80)).max(30),
+  tag: z.string().trim().max(100),
+  description: z.string().trim().min(1).max(5000),
+  featured: z.boolean(),
+  published: z.boolean(),
+});
+
+const ALLOWED_IMAGE_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
+const MAX_IMAGE_BYTES = 8 * 1024 * 1024;
 
 let publicPropertiesCache: PublicProperty[] | null = null;
 let publicPropertiesCachedAt = 0;
@@ -123,22 +154,11 @@ export function useProperties(includeUnpublished = false) {
 export async function saveProperty(input: PropertyInput, originalId?: string) {
   const { supabase } = await import("./supabase");
   if (!supabase) throw new Error("Supabase todavía no está configurado.");
+  const validated = propertyInputSchema.parse(input);
+  const { image, ...propertyFields } = validated;
   const row: PropertyRow = {
-    id: input.id,
-    title: input.title,
-    type: input.type,
-    operation: input.operation,
-    price: input.price,
-    location: input.location,
-    image_url: input.image,
-    surface: input.surface,
-    rooms: input.rooms,
-    baths: input.baths,
-    extras: input.extras,
-    tag: input.tag,
-    description: input.description,
-    featured: input.featured,
-    published: input.published,
+    ...propertyFields,
+    image_url: image,
   };
 
   const query = originalId
@@ -185,7 +205,13 @@ export async function importFallbackProperties() {
 export async function uploadPropertyImage(file: File) {
   const { supabase } = await import("./supabase");
   if (!supabase) throw new Error("Supabase todavía no está configurado.");
-  const extension = file.name.split(".").pop()?.toLowerCase() || "jpg";
+  if (!ALLOWED_IMAGE_TYPES.has(file.type)) {
+    throw new Error("Formato no permitido. Usá JPG, PNG o WebP.");
+  }
+  if (file.size > MAX_IMAGE_BYTES) {
+    throw new Error("La imagen no puede superar los 8 MB.");
+  }
+  const extension = file.type === "image/png" ? "png" : file.type === "image/webp" ? "webp" : "jpg";
   const path = `${crypto.randomUUID()}.${extension}`;
   const { error } = await supabase.storage.from("property-images").upload(path, file, {
     cacheControl: "3600",
