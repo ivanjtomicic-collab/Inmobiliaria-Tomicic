@@ -119,14 +119,14 @@ function ThemeToggle() {
 
 function Footer() {
   return (
-    <footer className="flex flex-col items-center justify-between gap-6 border-t border-fg/5 bg-bg px-6 py-12 md:flex-row">
+    <footer className="grid grid-cols-1 items-center gap-6 border-t border-fg/5 bg-bg px-6 py-12 md:grid-cols-3">
       <div className="flex items-center gap-3">
         <Logo className="size-6 opacity-50" />
         <span className="text-sm font-bold uppercase tracking-tighter text-fg opacity-50">
           © 2026 Tomicic Inmobiliaria
         </span>
       </div>
-      <div className="flex gap-8 text-[10px] font-bold uppercase tracking-[0.2em] text-fg/40">
+      <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 text-center text-[10px] font-bold uppercase tracking-[0.2em] text-fg/40">
         <a
           href="https://www.instagram.com/tomicicnegociosinmobiliarios/"
           target="_blank"
@@ -143,8 +143,11 @@ function Footer() {
         >
           Facebook
         </a>
-        <a href="https://wa.me/542364222882" className="hover:text-fg">WhatsApp</a>
+        <a href="mailto:inmobiliariatomicic@gmail.com" className="hover:text-fg">
+          inmobiliariatomicic@gmail.com
+        </a>
       </div>
+      <div aria-hidden="true" className="hidden md:block" />
     </footer>
   );
 }
