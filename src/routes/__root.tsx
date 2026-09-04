@@ -272,9 +272,11 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   return (
     <>
-      <div className="min-h-screen bg-bg font-display text-fg">
+      <div className="flex min-h-screen flex-col bg-bg font-display text-fg">
         <Header />
-        <Outlet />
+        <div className="flex-1">
+          <Outlet />
+        </div>
         <Footer />
         <WhatsAppButton />
       </div>
