@@ -7,6 +7,7 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { Toaster } from "sonner";
+import { Facebook, Instagram, Mail } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
@@ -131,19 +132,25 @@ function Footer() {
           href="https://www.instagram.com/tomicicnegociosinmobiliarios/"
           target="_blank"
           rel="noreferrer"
-          className="hover:text-fg"
+          className="inline-flex items-center gap-2 hover:text-fg"
         >
+          <Instagram className="size-4" aria-hidden="true" />
           Instagram
         </a>
         <a
           href="https://www.facebook.com/search/top?q=tomicic%20negocios%20inmobiliarios&locale=es_LA"
           target="_blank"
           rel="noreferrer"
-          className="hover:text-fg"
+          className="inline-flex items-center gap-2 hover:text-fg"
         >
+          <Facebook className="size-4" aria-hidden="true" />
           Facebook
         </a>
-        <a href="mailto:inmobiliariatomicic@gmail.com" className="hover:text-fg">
+        <a
+          href="mailto:inmobiliariatomicic@gmail.com"
+          className="inline-flex items-center gap-2 hover:text-fg"
+        >
+          <Mail className="size-4" aria-hidden="true" />
           inmobiliariatomicic@gmail.com
         </a>
       </div>
