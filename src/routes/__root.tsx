@@ -15,6 +15,21 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { WhatsAppButton } from "../components/WhatsAppButton";
 
 const tomicicLogo = `${import.meta.env.BASE_URL}branding/tomicic-logo.jpg`;
+const tomicicLogoDark = `${import.meta.env.BASE_URL}branding/tomicic-logo-dark.png`;
+
+function BrandLockup() {
+  return (
+    <div className="flex min-w-[145px] items-center gap-3">
+      <Logo className="size-11 rounded-sm" />
+      <span className="flex flex-col font-mono uppercase leading-none">
+        <span className="text-sm font-bold tracking-tight text-fg">Tomicic</span>
+        <span className="mt-2 text-[8px] font-medium tracking-[0.18em] text-brand-blue-text">
+          Inmobiliaria
+        </span>
+      </span>
+    </div>
+  );
+}
 
 function Logo({ className = "size-8" }: { className?: string }) {
   return (
@@ -23,7 +38,13 @@ function Logo({ className = "size-8" }: { className?: string }) {
         src={tomicicLogo}
         alt=""
         aria-hidden="true"
-        className="absolute top-1/2 left-1/2 h-[145%] w-[145%] max-w-none -translate-x-1/2 -translate-y-1/2 object-cover"
+        className="absolute top-1/2 left-1/2 block h-[145%] w-[145%] max-w-none -translate-x-1/2 -translate-y-1/2 object-cover dark:hidden"
+      />
+      <img
+        src={tomicicLogoDark}
+        alt=""
+        aria-hidden="true"
+        className="absolute top-1/2 left-1/2 hidden h-[145%] w-[145%] max-w-none -translate-x-1/2 -translate-y-1/2 object-contain dark:block"
       />
     </div>
   );
@@ -34,36 +55,36 @@ const navLinks = [
   { to: "/propiedades", label: "Lotes", search: { tipo: "terreno" } },
   { to: "/propiedades", label: "Alquileres", search: { operacion: "alquiler" } },
   { to: "/tasaciones", label: "Tasaciones" },
-  { to: "/acerca-de", label: "Acerca de" },
+  { to: "/acerca-de", label: "Nosotros" },
   { to: "/contacto", label: "Contacto" },
 ] as const;
 
 function Header() {
   return (
-    <nav className="sticky top-0 z-50 flex items-center justify-between border-b border-fg/5 bg-bg/80 px-6 py-4 backdrop-blur-md">
-      <Link to="/" className="flex items-center gap-3">
-        <Logo />
-        <span className="text-xl font-extrabold uppercase tracking-tighter text-fg">Tomicic</span>
-      </Link>
-      <div className="flex items-center gap-4 lg:gap-8">
-        <div className="hidden gap-8 text-sm font-medium uppercase tracking-widest text-fg/60 lg:flex">
+    <header className="sticky top-0 z-50 bg-bg/85 px-3 py-3 backdrop-blur-xl md:px-6">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between rounded-[1.75rem] border border-fg/10 bg-card px-5 py-5 shadow-lg shadow-fg/5 md:px-8 md:py-6">
+        <Link to="/" aria-label="Tomicic Inmobiliaria — Inicio">
+          <BrandLockup />
+        </Link>
+        <div className="flex items-center gap-3 lg:gap-8">
+          <div className="hidden gap-7 font-mono text-[11px] font-bold uppercase tracking-tight text-fg/65 lg:flex">
           {navLinks.map((l) => (
             <Link
               key={l.label}
               to={l.to}
               search={"search" in l ? l.search : {}}
-              className="transition-colors hover:text-brand-blue"
+              className="transition-colors hover:text-brand-blue-text"
               activeProps={{ className: "text-fg" }}
             >
               {l.label}
             </Link>
           ))}
-        </div>
-        <details className="group relative lg:hidden">
-          <summary className="cursor-pointer list-none text-xs font-medium uppercase tracking-widest text-fg/60">
-            Menú
-          </summary>
-          <div className="absolute top-8 right-0 flex max-h-[calc(100vh-6rem)] w-52 flex-col overflow-y-auto rounded-2xl bg-bg p-3 text-xs font-medium uppercase tracking-widest text-fg shadow-xl ring-1 ring-fg/10">
+          </div>
+          <details className="group relative lg:hidden">
+            <summary className="cursor-pointer list-none font-mono text-[10px] font-bold uppercase tracking-wider text-fg/60">
+              Menú
+            </summary>
+            <div className="absolute top-10 right-0 flex max-h-[calc(100vh-8rem)] w-52 flex-col overflow-y-auto rounded-2xl bg-card p-3 font-mono text-[10px] font-bold uppercase tracking-wider text-fg shadow-xl ring-1 ring-fg/10">
             {navLinks.map((l) => (
               <Link
                 key={l.label}
@@ -74,11 +95,12 @@ function Header() {
                 {l.label}
               </Link>
             ))}
-          </div>
-        </details>
-        <ThemeToggle />
-      </div>
-    </nav>
+            </div>
+          </details>
+          <ThemeToggle />
+        </div>
+      </nav>
+    </header>
   );
 }
 

@@ -100,7 +100,7 @@ function LoginForm() {
   return (
     <AdminMessage>
       <form onSubmit={login} className="mx-auto max-w-md rounded-3xl bg-card p-8 text-card-foreground shadow-xl">
-        <p className="font-mono text-xs text-brand-blue">[ ACCESO PRIVADO ]</p>
+        <p className="font-mono text-xs text-brand-blue-text">[ ACCESO PRIVADO ]</p>
         <h1 className="mt-2 text-3xl font-extrabold">Administrar propiedades</h1>
         <label className="mt-8 block text-xs font-bold uppercase">Email</label>
         <input className="mt-2 w-full rounded-xl border p-3" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
@@ -211,7 +211,7 @@ function PropertyManager({ email }: { email: string }) {
   return (
     <main className="mx-auto max-w-7xl px-6 py-12">
       <div className="mb-10 flex flex-wrap items-center justify-between gap-4">
-        <div><p className="font-mono text-xs text-brand-blue">[ PANEL PRIVADO ]</p><h1 className="text-4xl font-extrabold">Propiedades</h1><p className="text-sm text-fg/50">{email}</p></div>
+        <div><p className="font-mono text-xs text-brand-blue-text">[ PANEL PRIVADO ]</p><h1 className="text-4xl font-extrabold">Propiedades</h1><p className="text-sm text-fg/50">{email}</p></div>
         <div className="flex gap-3"><Link to="/" className="rounded-xl border px-4 py-2">Ver sitio</Link><button onClick={() => void supabase?.auth.signOut()} className="rounded-xl bg-fg px-4 py-2 text-bg">Cerrar sesión</button></div>
       </div>
 

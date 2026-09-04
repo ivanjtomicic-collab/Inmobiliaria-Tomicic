@@ -16,7 +16,7 @@ export const Route = createFileRoute("/acerca-de")({
 function AcercaDePage() {
   return (
     <section className="mx-auto max-w-7xl animate-fade-up px-6 py-20">
-      <p className="mb-3 font-mono text-sm text-brand-blue">[ ACERCA DE NOSOTROS ]</p>
+      <p className="mb-3 font-mono text-sm text-brand-blue-text">[ NOSOTROS ]</p>
       <div className="grid gap-12 lg:grid-cols-[1fr_0.8fr] lg:items-start">
         <h1 className="text-5xl font-extrabold tracking-tight md:text-7xl">
           Tu proyecto inmobiliario, acompañado de cerca.

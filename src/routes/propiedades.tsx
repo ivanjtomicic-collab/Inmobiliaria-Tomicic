@@ -58,7 +58,7 @@ function PropiedadesPage() {
 
   return (
     <section className="mx-auto max-w-7xl px-6 py-16">
-      <p className="mb-2 font-mono text-sm text-brand-blue">[ CATÁLOGO 2026 ]</p>
+      <p className="mb-2 font-mono text-sm text-brand-blue-text">[ CATÁLOGO 2026 ]</p>
       <h1 className="mb-8 text-4xl font-extrabold tracking-tight md:text-5xl">
         Propiedades disponibles
       </h1>

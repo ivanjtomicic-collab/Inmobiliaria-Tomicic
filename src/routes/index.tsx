@@ -36,7 +36,7 @@ function HomePage() {
       {/* Hero */}
       <section className="mx-auto max-w-7xl animate-fade-up px-6 pt-20 pb-12 text-center">
         <h1 className="mb-8 text-5xl leading-[0.9] font-extrabold tracking-tight text-balance md:text-7xl">
-          Inversiones que <br /> definen tu <span className="text-brand-blue">futuro.</span>
+          Inversiones que <br /> definen tu <span className="text-brand-blue-text">futuro.</span>
         </h1>
 
         <form
@@ -83,7 +83,7 @@ function HomePage() {
       <section className="mx-auto max-w-7xl px-6 py-20">
         <div className="mb-12 flex items-end justify-between">
           <div>
-            <p className="mb-2 font-mono text-sm text-brand-blue">[ CATÁLOGO 2026 ]</p>
+            <p className="mb-2 font-mono text-sm text-brand-blue-text">[ CATÁLOGO 2026 ]</p>
             <h2 className="text-3xl font-bold tracking-tight">Propiedades Destacadas</h2>
           </div>
           <Link

@@ -18,7 +18,7 @@ function TasacionesPage() {
   return (
     <>
       <section className="mx-auto max-w-7xl animate-fade-up px-6 py-20">
-        <p className="mb-3 font-mono text-sm text-brand-blue">[ TASACIONES ]</p>
+        <p className="mb-3 font-mono text-sm text-brand-blue-text">[ TASACIONES ]</p>
         <h1 className="max-w-4xl text-5xl font-extrabold tracking-tight md:text-7xl">
           Conocé el valor real de tu propiedad.
         </h1>

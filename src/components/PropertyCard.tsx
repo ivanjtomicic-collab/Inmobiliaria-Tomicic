@@ -36,7 +36,7 @@ export function PropertyCard({
       <div className="mt-4 space-y-1">
         <div className="flex items-start justify-between gap-3">
           <h3 className="text-xl font-bold tracking-tight text-fg">{property.title}</h3>
-          <span className="shrink-0 font-mono font-bold text-brand-blue [filter:drop-shadow(0_0_1px_rgba(0,0,0,0.15))]">
+          <span className="shrink-0 font-mono font-bold text-brand-blue-text">
             {property.price}
           </span>
         </div>

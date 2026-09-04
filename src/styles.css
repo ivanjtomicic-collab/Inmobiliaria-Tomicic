@@ -20,6 +20,7 @@
 
 @theme inline {
   --color-brand-blue: var(--brand-blue);
+  --color-brand-blue-text: var(--brand-blue-text);
   --color-brand-gray: var(--brand-gray);
   --color-brand-contrast: var(--brand-contrast);
   --color-bg: var(--bg);
@@ -37,6 +38,7 @@
 
 :root {
   --brand-blue: oklch(0.83 0.07 216);
+  --brand-blue-text: oklch(0.57 0.1 216);
   --brand-gray: oklch(0.53 0.005 65);
   --brand-contrast: oklch(0.94 0.004 95);
   --bg: oklch(0.99 0.002 95);
@@ -126,6 +128,7 @@
   --bg: oklch(0.16 0.008 255);
   --fg: oklch(0.94 0.006 255);
   --brand-blue: oklch(0.76 0.09 216);
+  --brand-blue-text: oklch(0.78 0.09 216);
   color-scheme: dark;
   --background: oklch(0.129 0.042 264.695);
   --foreground: oklch(0.984 0.003 247.858);

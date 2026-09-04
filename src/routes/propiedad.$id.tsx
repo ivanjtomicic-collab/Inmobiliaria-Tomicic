@@ -71,7 +71,7 @@ function PropiedadDetalle() {
           </div>
 
           <div className="flex flex-col justify-center">
-            <p className="mb-2 font-mono text-sm text-brand-blue">
+            <p className="mb-2 font-mono text-sm text-brand-blue-text">
               [ {property.operation.toUpperCase()} ]
             </p>
             <h1 className="text-4xl font-extrabold tracking-tight md:text-5xl">
