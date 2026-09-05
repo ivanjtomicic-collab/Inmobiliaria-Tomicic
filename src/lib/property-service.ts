@@ -39,7 +39,7 @@ const safeImageUrl = z.string().max(2048).refine((value) => {
 const propertyInputSchema = z.object({
   id: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/).max(120),
   title: z.string().trim().min(1).max(160),
-  type: z.enum(["casa", "terreno", "departamento", "galpon"]),
+  type: z.enum(["casa", "departamento", "terreno", "campo", "local_comercial", "galpon"]),
   operation: z.enum(["venta", "alquiler"]),
   price: z.string().trim().min(1).max(80),
   location: z.string().trim().min(1).max(200),

@@ -5,7 +5,13 @@ import casaBelgrano from "@/assets/casa-belgrano.jpg";
 import terrenoPilar from "@/assets/terreno-pilar.jpg";
 import deptoPalermo from "@/assets/depto-palermo.jpg";
 
-export type PropertyType = "casa" | "terreno" | "departamento" | "galpon";
+export type PropertyType =
+  | "casa"
+  | "departamento"
+  | "terreno"
+  | "campo"
+  | "local_comercial"
+  | "galpon";
 export type Operation = "venta" | "alquiler";
 
 export interface Property {

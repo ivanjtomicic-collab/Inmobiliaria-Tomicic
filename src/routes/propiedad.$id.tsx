@@ -34,12 +34,21 @@ function PropiedadDetalle() {
     );
   }
 
+  const typeLabels = {
+    casa: "Casa",
+    departamento: "Departamento",
+    terreno: "Lote",
+    campo: "Campo",
+    local_comercial: "Local comercial",
+    galpon: "Galpón",
+  } as const;
+
   const specs = [
     property.surface && { label: "Superficie", value: property.surface },
     property.rooms && { label: "Ambientes", value: property.rooms },
     property.baths && { label: "Baños", value: property.baths },
     { label: "Operación", value: property.operation === "venta" ? "Venta" : "Alquiler" },
-    { label: "Tipo", value: property.type === "terreno" ? "lote" : property.type },
+    { label: "Tipo", value: typeLabels[property.type] },
     { label: "Ubicación", value: property.location },
   ].filter(Boolean) as { label: string; value: string }[];
 

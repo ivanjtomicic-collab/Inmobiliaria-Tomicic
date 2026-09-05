@@ -8,7 +8,7 @@ create table if not exists public.admin_users (
 create table if not exists public.properties (
   id text primary key check (id ~ '^[a-z0-9]+(?:-[a-z0-9]+)*$'),
   title text not null check (char_length(title) between 1 and 160),
-  type text not null check (type in ('casa', 'terreno', 'departamento', 'galpon')),
+  type text not null check (type in ('casa', 'departamento', 'terreno', 'campo', 'local_comercial', 'galpon')),
   operation text not null check (operation in ('venta', 'alquiler')),
   price text not null check (char_length(price) between 1 and 80),
   location text not null check (char_length(location) between 1 and 200),

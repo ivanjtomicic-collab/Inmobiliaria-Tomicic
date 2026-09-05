@@ -5,7 +5,9 @@ import { PropertyCard } from "@/components/PropertyCard";
 import { useProperties } from "@/lib/property-service";
 
 const searchSchema = z.object({
-  tipo: z.enum(["casa", "terreno", "departamento", "galpon", "alquiler"]).optional(),
+  tipo: z
+    .enum(["casa", "departamento", "terreno", "campo", "local_comercial", "galpon", "alquiler"])
+    .optional(),
   operacion: z.enum(["venta", "alquiler"]).optional(),
   q: z.string().trim().max(100).optional(),
 });
@@ -33,7 +35,10 @@ export const Route = createFileRoute("/propiedades")({
 const tipoFilters = [
   { value: undefined, label: "Todas" },
   { value: "casa", label: "Casas" },
+  { value: "departamento", label: "Departamentos" },
   { value: "terreno", label: "Lotes" },
+  { value: "campo", label: "Campos" },
+  { value: "local_comercial", label: "Locales comerciales" },
   { value: "galpon", label: "Galpones" },
 ] as const;
 
