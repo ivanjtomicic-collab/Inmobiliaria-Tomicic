@@ -52,7 +52,6 @@ function Logo({ className = "size-8" }: { className?: string }) {
 
 const navLinks = [
   { to: "/propiedades", label: "Propiedades" },
-  { to: "/propiedades", label: "Lotes", search: { tipo: "terreno" } },
   { to: "/propiedades", label: "Alquileres", search: { operacion: "alquiler" } },
   { to: "/tasaciones", label: "Tasaciones" },
   { to: "/acerca-de", label: "Nosotros" },
