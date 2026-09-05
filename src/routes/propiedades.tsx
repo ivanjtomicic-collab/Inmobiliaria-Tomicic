@@ -5,7 +5,7 @@ import { PropertyCard } from "@/components/PropertyCard";
 import { useProperties } from "@/lib/property-service";
 
 const searchSchema = z.object({
-  tipo: z.enum(["casa", "terreno", "departamento", "alquiler"]).optional(),
+  tipo: z.enum(["casa", "terreno", "departamento", "galpon", "alquiler"]).optional(),
   operacion: z.enum(["venta", "alquiler"]).optional(),
   q: z.string().trim().max(100).optional(),
 });
@@ -34,7 +34,7 @@ const tipoFilters = [
   { value: undefined, label: "Todas" },
   { value: "casa", label: "Casas" },
   { value: "terreno", label: "Lotes" },
-  { value: "alquiler", label: "Alquileres" },
+  { value: "galpon", label: "Galpones" },
 ] as const;
 
 function PropiedadesPage() {
