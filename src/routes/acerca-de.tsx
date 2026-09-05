@@ -48,7 +48,7 @@ function AcercaDePage() {
               cada cliente.
             </p>
             <p>
-              En Tomicic Negocios Inmobiliarios, vas a poder cumplir tus sueños sin miedo con el
+              En Tomicic Negocios Inmobiliarios, vas a poder cumplir tus sueños con el
               mejor asesoramiento profesional.
             </p>
           </div>
