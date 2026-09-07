@@ -1,6 +1,7 @@
 # Automatización de consultas
 
-1. Ejecutá `supabase/inquiries.sql` en el SQL Editor.
+1. Ejecutá `supabase/inquiries.sql` en el SQL Editor. Si la tabla ya existe,
+   ejecutá `supabase/add-inquiry-phone.sql` antes de desplegar el formulario y la función.
 2. Desplegá la función `submit-inquiry` desde el panel o la CLI de Supabase.
 3. Configurá los secretos `RESEND_API_KEY`, `INQUIRIES_FROM_EMAIL` e
    `INQUIRIES_TO_EMAIL`. El remitente debe estar verificado en Resend.

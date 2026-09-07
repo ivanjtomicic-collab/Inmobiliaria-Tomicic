@@ -56,6 +56,7 @@ Deno.serve(async (request) => {
     const firstName = clean(body.firstName, 100);
     const lastName = clean(body.lastName, 100);
     const email = clean(body.email, 254).toLowerCase();
+    const phone = clean(body.phone, 50);
     const interest = clean(body.interest, 100);
     const message = clean(body.message, 3000);
     const propertyId = clean(body.propertyId, 120) || null;
@@ -64,6 +65,7 @@ Deno.serve(async (request) => {
     if (
       !firstName ||
       !lastName ||
+      !phone ||
       !interest ||
       !message ||
       !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
@@ -79,6 +81,7 @@ Deno.serve(async (request) => {
       first_name: firstName,
       last_name: lastName,
       email,
+      phone,
       interest,
       message,
       property_id: propertyId,
@@ -118,7 +121,7 @@ Deno.serve(async (request) => {
             to: [salesEmail],
             reply_to: email,
             subject: `${safeInterest} - Consulta de ${safeName}`,
-            html: `<h2>Nueva consulta inmobiliaria</h2><p><strong>Cliente:</strong> ${safeName}<br><strong>Email:</strong> ${escapeHtml(email)}<br><strong>Interés:</strong> ${safeInterest}<br><strong>Propiedad:</strong> ${safeProperty}</p><p><strong>Mensaje:</strong><br>${safeMessage}</p>`,
+            html: `<h2>Nueva consulta inmobiliaria</h2><p><strong>Cliente:</strong> ${safeName}<br><strong>Email:</strong> ${escapeHtml(email)}<br><strong>Teléfono:</strong> ${escapeHtml(phone)}<br><strong>Interés:</strong> ${safeInterest}<br><strong>Propiedad:</strong> ${safeProperty}</p><p><strong>Mensaje:</strong><br>${safeMessage}</p>`,
           }),
         }),
       ]);

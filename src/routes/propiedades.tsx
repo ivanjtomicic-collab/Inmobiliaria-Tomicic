@@ -46,12 +46,13 @@ function PropiedadesPage() {
   const search = Route.useSearch();
   const navigate = Route.useNavigate();
   const { properties, loading, error } = useProperties();
+  const operation = search.operacion ?? (search.tipo === "alquiler" ? "alquiler" : "venta");
+  const propertyType = search.tipo === "alquiler" ? undefined : search.tipo;
 
   const filtered = useMemo(() => {
     return properties.filter((p) => {
-      if (search.tipo === "alquiler" && p.operation !== "alquiler") return false;
-      if (search.tipo && search.tipo !== "alquiler" && p.type !== search.tipo) return false;
-      if (search.operacion && p.operation !== search.operacion) return false;
+      if (p.operation !== operation) return false;
+      if (propertyType && p.type !== propertyType) return false;
       if (search.q) {
         const q = search.q.toLowerCase();
         const hay = `${p.title} ${p.location}`.toLowerCase();
@@ -59,7 +60,7 @@ function PropiedadesPage() {
       }
       return true;
     });
-  }, [properties, search]);
+  }, [properties, search.q, operation, propertyType]);
 
   return (
     <section className="mx-auto max-w-7xl px-6 py-16">
@@ -70,13 +71,12 @@ function PropiedadesPage() {
 
       <div className="mb-12 flex flex-wrap items-center gap-2">
         {tipoFilters.map((f) => {
-          const active =
-            f.value === search.tipo || (f.value === undefined && search.tipo === undefined);
+          const active = f.value === propertyType;
           return (
             <button
               key={f.label}
               onClick={() =>
-                navigate({ search: { ...search, tipo: f.value }, replace: true })
+                navigate({ search: { ...search, tipo: f.value, operacion: operation }, replace: true })
               }
               className={`rounded-full border border-fg/10 px-4 py-1 text-xs font-bold uppercase transition-colors ${
                 active ? "bg-fg text-bg" : "hover:bg-brand-blue/10"

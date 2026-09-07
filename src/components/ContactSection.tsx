@@ -8,6 +8,7 @@ type InquiryPayload = {
   firstName: string;
   lastName: string;
   email: string;
+  phone: string;
   interest: string;
   message: string;
   propertyId?: string;
@@ -34,12 +35,18 @@ export function ContactSection({
       firstName: String(form.get("nombre") ?? "").trim(),
       lastName: String(form.get("apellido") ?? "").trim(),
       email: String(form.get("email") ?? "").trim(),
+      phone: String(form.get("telefono") ?? "").trim(),
       interest: String(form.get("interes") ?? "Consulta inmobiliaria").trim(),
       message: String(form.get("mensaje") ?? "").trim(),
       ...(propertyId ? { propertyId } : {}),
       ...(propertyTitle ? { propertyTitle } : {}),
       website: String(form.get("website") ?? ""),
     };
+
+    if (!payload.phone) {
+      toast.error("Ingresá tu teléfono.");
+      return;
+    }
 
     setSending(true);
     try {
@@ -54,6 +61,7 @@ export function ContactSection({
           first_name: payload.firstName,
           last_name: payload.lastName,
           email: payload.email,
+          phone: payload.phone,
           interest: payload.interest,
           message: payload.message,
           property_id: payload.propertyId ?? null,
@@ -76,7 +84,7 @@ export function ContactSection({
         `${payload.interest} - Consulta de ${payload.firstName} ${payload.lastName}`,
       );
       const body = encodeURIComponent(
-        `Nombre: ${payload.firstName}\nApellido: ${payload.lastName}\nEmail: ${payload.email}\nInterés: ${payload.interest}\nPropiedad: ${payload.propertyTitle ?? "Consulta general"}\n\nMensaje:\n${payload.message}`,
+        `Nombre: ${payload.firstName}\nApellido: ${payload.lastName}\nEmail: ${payload.email}\nTeléfono: ${payload.phone}\nInterés: ${payload.interest}\nPropiedad: ${payload.propertyTitle ?? "Consulta general"}\n\nMensaje:\n${payload.message}`,
       );
       window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
       toast.info("Abrimos tu correo para que puedas completar el envío.");
@@ -146,6 +154,12 @@ export function ContactSection({
                 Email
               </label>
               <input id="email" name="email" required type="email" maxLength={254} autoComplete="email" className="rounded-xl border border-fg/5 bg-bg p-4 outline-none ring-brand-blue/20 focus:ring-2" />
+            </div>
+            <div className="flex flex-col gap-2 sm:col-span-2">
+              <label htmlFor="telefono" className="text-[10px] font-bold uppercase tracking-widest text-fg/40">
+                Teléfono (obligatorio)
+              </label>
+              <input id="telefono" name="telefono" required type="tel" maxLength={50} autoComplete="tel" className="rounded-xl border border-fg/5 bg-bg p-4 outline-none ring-brand-blue/20 focus:ring-2" />
             </div>
           </div>
           <div className="flex flex-col gap-2">
