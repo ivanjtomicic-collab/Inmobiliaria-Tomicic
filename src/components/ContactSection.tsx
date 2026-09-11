@@ -20,10 +20,14 @@ export function ContactSection({
   propertyId,
   propertyTitle,
   defaultInterest,
+  interest,
+  onInterestChange,
 }: {
   propertyId?: string;
   propertyTitle?: string;
   defaultInterest?: string;
+  interest?: string;
+  onInterestChange?: (interest: string) => void;
 }) {
   const [sending, setSending] = useState(false);
 
@@ -166,7 +170,7 @@ export function ContactSection({
             <label htmlFor="interes" className="text-[10px] font-bold uppercase tracking-widest text-fg/40">
               Interés
             </label>
-            <select id="interes" name="interes" defaultValue={defaultInterest} className="rounded-xl border border-fg/5 bg-bg p-4 outline-none ring-brand-blue/20 focus:ring-2">
+            <select id="interes" name="interes" defaultValue={interest === undefined ? defaultInterest : undefined} value={interest} onChange={(event) => onInterestChange?.(event.target.value)} className="rounded-xl border border-fg/5 bg-bg p-4 outline-none ring-brand-blue/20 focus:ring-2">
               <option>Comprar una propiedad</option>
               <option>Alquilar un inmueble</option>
               <option>Vender mi propiedad</option>

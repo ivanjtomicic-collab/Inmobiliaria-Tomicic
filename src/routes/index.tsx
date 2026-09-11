@@ -26,8 +26,14 @@ export const Route = createFileRoute("/")({
 function HomePage() {
   const navigate = useNavigate();
   const { properties, loading, error } = useProperties();
-  const [tipo, setTipo] = useState<"" | "casa" | "terreno" | "alquiler">("");
+  const [servicio, setServicio] = useState<"venta" | "alquiler" | "tasaciones">("venta");
+  const [interest, setInterest] = useState("Comprar una propiedad");
   const [ubicacion, setUbicacion] = useState("");
+  const openAppraisalForm = () => {
+    setInterest("Tasaciones");
+    document.getElementById("interes")?.focus({ preventScroll: true });
+    document.getElementById("interes")?.scrollIntoView({ behavior: "smooth", block: "center" });
+  };
   const featuredProperties = properties.filter((property) => property.featured);
   const featured = (featuredProperties.length ? featuredProperties : properties).slice(0, 3);
 
@@ -43,28 +49,36 @@ function HomePage() {
           className="mx-auto flex max-w-3xl flex-col gap-2 rounded-2xl bg-card p-2 text-card-foreground shadow-xl shadow-fg/5 ring-1 ring-fg/5 md:flex-row"
           onSubmit={(e) => {
             e.preventDefault();
+            if (servicio === "tasaciones") {
+              openAppraisalForm();
+              return;
+            }
             navigate({
               to: "/propiedades",
               search: {
-                ...(tipo ? { tipo } : {}),
+                operacion: servicio,
                 ...(ubicacion ? { q: ubicacion } : {}),
               },
             });
           }}
         >
           <select
-            aria-label="Tipo de propiedad"
-            value={tipo}
-            onChange={(e) => setTipo(e.target.value as "" | "casa" | "terreno" | "alquiler")}
+            aria-label="Servicio"
+            value={servicio}
+            onChange={(e) => {
+              const value = e.target.value as typeof servicio;
+              setServicio(value);
+              if (value === "tasaciones") openAppraisalForm();
+            }}
             className="bg-transparent px-6 py-3 font-medium focus:outline-none md:border-r md:border-fg/10"
           >
-            <option value="">Todo tipo</option>
-            <option value="casa">Casas</option>
-            <option value="terreno">Lotes</option>
+            <option value="venta">Propiedades</option>
             <option value="alquiler">Alquileres</option>
+            <option value="tasaciones">Tasaciones</option>
           </select>
           <input
             type="text"
+            disabled={servicio === "tasaciones"}
             value={ubicacion}
             onChange={(e) => setUbicacion(e.target.value)}
             placeholder="Ubicación en Argentina..."
@@ -74,7 +88,7 @@ function HomePage() {
             type="submit"
             className="rounded-xl bg-brand-gray px-8 py-3 font-bold uppercase tracking-tighter text-brand-contrast transition-all hover:bg-brand-gray/85"
           >
-            Buscar
+            {servicio === "tasaciones" ? "Consultar tasación" : "Buscar"}
           </button>
         </form>
       </section>
@@ -110,7 +124,7 @@ function HomePage() {
         )}
       </section>
 
-      <ContactSection />
+      <ContactSection interest={interest} onInterestChange={setInterest} />
     </>
   );
 }
