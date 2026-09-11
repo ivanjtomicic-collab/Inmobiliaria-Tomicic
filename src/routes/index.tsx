@@ -27,12 +27,9 @@ function HomePage() {
   const navigate = useNavigate();
   const { properties, loading, error } = useProperties();
   const [servicio, setServicio] = useState<"venta" | "alquiler" | "tasaciones">("venta");
-  const [interest, setInterest] = useState("Comprar una propiedad");
   const [ubicacion, setUbicacion] = useState("");
   const openAppraisalForm = () => {
-    setInterest("Tasaciones");
-    document.getElementById("interes")?.focus({ preventScroll: true });
-    document.getElementById("interes")?.scrollIntoView({ behavior: "smooth", block: "center" });
+    navigate({ to: "/tasaciones", hash: "contacto" });
   };
   const featuredProperties = properties.filter((property) => property.featured);
   const featured = (featuredProperties.length ? featuredProperties : properties).slice(0, 3);
@@ -124,7 +121,7 @@ function HomePage() {
         )}
       </section>
 
-      <ContactSection interest={interest} onInterestChange={setInterest} />
+      <ContactSection />
     </>
   );
 }
